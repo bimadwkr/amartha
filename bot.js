@@ -1,13 +1,42 @@
-const {
-  default: makeWASocket,
-  useMultiFileAuthState,
-  fetchLatestBaileysVersion,
-  DisconnectReason
-} = require("@whiskeysockets/baileys")
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys");
+const pino = require("pino");
 
-const pino = require("pino")
-const qrcode = require("qrcode-terminal")
-const fs = require("fs")
+async function startBot() {
+  const { state, saveCreds } = await useMultiFileAuthState("auth");
+
+  const sock = makeWASocket({
+    logger: pino({ level: "silent" }),
+    auth: state,
+    printQRInTerminal: false,
+  });
+
+  sock.ev.on("creds.update", saveCreds);
+
+  sock.ev.on("connection.update", async (update) => {
+    const { connection, lastDisconnect } = update;
+
+    if (connection === "close") {
+      const shouldReconnect =
+        lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
+
+      console.log("Disconnected. Reconnecting...", shouldReconnect);
+      if (shouldReconnect) startBot();
+    }
+
+    if (connection === "open") {
+      console.log("Bot Connected ✅");
+    }
+  });
+
+  // 🔥 Pairing Code
+  if (!sock.authState?.creds?.registered) {
+    const phoneNumber = "6281233415118"; // ganti nomor kamu (tanpa +)
+    const code = await sock.requestPairingCode(phoneNumber);
+    console.log("Pairing Code kamu:", code);
+  }
+}
+
+startBot();
 
 // ================= CONFIG =================
 const GROUP_ID = "120363385410561546@g.us"
