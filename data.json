@@ -1,0 +1,51 @@
+{
+  "UK": {
+    "Bima": [
+      {
+        "nama": "Yulianti Grecol",
+        "status": "Ditolak❌"
+      },
+      {
+        "nama": "Robinah Karangpetir",
+        "status": "diproses"
+      }
+    ]
+  },
+  "CELENGAN": {
+    "Bima": [
+      {
+        "nama": "Maryanti",
+        "nominal": 160000
+      }
+    ],
+    "Mafuf": [
+      {
+        "nama": "Haryani",
+        "nominal": 120000
+      }
+    ]
+  },
+  "PENCAIRAN": {},
+  "BTC": {},
+  "PARSIAL": {
+    "Mafuf": [
+      {
+        "nama": "Baryati/Senon",
+        "nominal": 134000
+      },
+      {
+        "nama": "Baryati/Senon",
+        "nominal": 134000
+      },
+      {
+        "nama": "Baryati/Senon",
+        "nominal": 134000
+      },
+      {
+        "nama": "Baryati/Senon",
+        "nominal": 134000
+      }
+    ]
+  },
+  "SOS": {}
+}
