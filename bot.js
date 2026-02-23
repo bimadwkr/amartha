@@ -567,7 +567,6 @@ function parsePesan(text){
 }
 
 // ================= CONNECT =================
-// ================= CONNECT =================
 async function connectBot(){
 
   const { state, saveCreds } =
@@ -590,7 +589,7 @@ async function connectBot(){
   // ================= PAIRING CODE =================
   if (!sock.authState?.creds?.registered) {
 
-      const phoneNumber = "62XXXXXXXXXX" // GANTI dengan nomor kamu (tanpa +)
+      const phoneNumber = "6281233415118" // GANTI dengan nomor kamu (tanpa +)
       
       setTimeout(async () => {
           const code = await sock.requestPairingCode(phoneNumber)
