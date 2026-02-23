@@ -245,10 +245,15 @@ async function connectBot(){
 
       const {connection,lastDisconnect,qr} = update
 
-      if(qr){
-          console.log("Scan QR:")
-          qrcode.generate(qr,{small:true})
-      }
+      if (qr) {
+  console.log("Scan QR ini di WhatsApp > Linked Devices:\n");
+
+  const qrcode = require("qrcode-terminal");
+  qrcode.generate(qr, { small: false });
+
+  console.log("\nJika QR tidak terbaca, gunakan link ini:");
+  console.log("https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + qr);
+}
 
       if(connection==="open"){
           console.log("BOT CONNECTED")
