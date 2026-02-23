@@ -241,23 +241,21 @@ async function connectBot(){
 
   sock.ev.on("creds.update",saveCreds)
 
-  sock.ev.on("connection.update",(update)=>{
+sock.ev.on("connection.update", ({ connection, qr }) => {
 
-      const {connection,lastDisconnect,qr} = update
+  if (qr) {
+    console.log("QR RECEIVED");
+    qrcode.generate(qr, { small: false });
 
-      if (qr) {
-  console.log("Scan QR ini di WhatsApp > Linked Devices:\n");
+    console.log(
+      "Link QR:",
+      "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + qr
+    );
+  }
 
-  const qrcode = require("qrcode-terminal");
-  qrcode.generate(qr, { small: false });
-
-  console.log("\nJika QR tidak terbaca, gunakan link ini:");
-  console.log("https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + qr);
-}
-
-      if(connection==="open"){
-          console.log("BOT CONNECTED")
-      }
+  if (connection === "open") {
+    console.log("BOT CONNECTED");
+  }
 
       if(connection==="close"){
 
